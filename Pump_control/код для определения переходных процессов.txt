@@ -1,0 +1,43 @@
+#include "Analog_Temp.h"
+#include <avr/pgmspace.h>
+#include <Arduino.h>
+
+Analog_Temp  first(A1);
+Analog_Temp second(A2);
+int powerPin = 9;
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(powerPin, OUTPUT);
+}
+ unsigned long timeper = 300000;
+  unsigned long timeper2 = 2100000;
+  unsigned long timeper3 = 3600000;
+  bool on = true;
+  bool on2 = true;
+  bool on3 = true;
+void loop()
+{
+  
+  unsigned long currentmillis = millis();
+  if(currentmillis<=timeper3 && on3)
+  {
+  if(currentmillis>=timeper && on)
+  {
+    digitalWrite(powerPin, HIGH);
+    Serial.println("Motor on;");
+    on = false;
+  }
+
+    if(currentmillis>=timeper2 && on2)
+  {
+    digitalWrite(powerPin, LOW);
+    Serial.println("Motor off;");
+    on2 = false;
+  }
+  first.PeriodShowTemp(60000, 0);
+  
+  second.PeriodShowTemp(60001, 1);
+  }
+  else if(on3){ Serial.println("End;"); on3 = false;}
+}

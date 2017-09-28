@@ -1,3 +1,6 @@
+// content of file MedianFilter.iso
+// you can open it with Arduino IDE
+
 //simple exumple of using median filter
 #include "MedianFilter.h"
 

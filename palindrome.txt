@@ -1,0 +1,106 @@
+//This program finds the biggest palindrome, that can be received from multiplying of two prime 5-digit numbers
+
+#include <iostream>
+#include <math.h>
+#include <conio.h>
+#include <vector>
+
+using namespace std;
+typedef unsigned long long big_type;
+
+bool isPalindrome(big_type); // checks if argument is a palindrome
+bool isPrimeNumber(long); // checks if argument is a prime number
+void printResult(long, long, big_type); //prints output information
+vector<long> findPrimeNumbers(long, long); // finds all prime numbers between arguments
+
+int main()
+{
+	const long MAXNUMBER = 99999;   // the largest five-digit number
+	const long MINNUMBER = 10000;   // the smallest five-digit number
+
+	auto primeNumbers = findPrimeNumbers(MINNUMBER, MAXNUMBER);
+
+	big_type palindrome(0);
+	long firstNomber(0), secondNomber(0);
+
+	// find suitable numbers in the vector
+	for (long i(primeNumbers.size() - 1); i >= 0; i--)
+	{
+		for (long j(primeNumbers.size() - 1); j >= 0; j--)
+		{
+			big_type result = big_type(primeNumbers[i]) * big_type(primeNumbers[j]);
+			if (isPalindrome(result))
+			{
+				//find the biggest palindrome
+				if (result > palindrome)
+				{
+					firstNomber = i;
+					secondNomber = j;
+					palindrome = result;
+				}
+			}
+		}
+	}
+
+	printResult(firstNomber, secondNomber, palindrome);
+
+	_getch();
+	return 0;
+}
+
+bool isPalindrome(big_type number)
+{
+	//find number of digits
+	int counter(0);
+	big_type temp = number;
+	while (temp)
+	{
+		temp /= 10;
+		counter++;
+	}
+
+	//check if this number is a palindrome
+	for (int i(1); i <= counter / 2; i++)
+	{	// compare two digits
+		int firstDigit = number%big_type(powl(10, i)) / big_type(powl(10, i - 1));
+		int secondDigit = (number / big_type(powl(10, counter - i))) % 10;
+		if (firstDigit != secondDigit)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool isPrimeNumber(long number)
+{
+	int maxValue = sqrt(number);
+	for (int i(2); i <= maxValue; i++)
+	{
+		if (number%i == 0)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+void printResult(long firstNumber, long secondNumber, big_type palindrome)
+{
+	cout << "First Number: " << firstNumber << endl;
+	cout << "Second Number: " << secondNumber << endl;
+	cout << "Palindrome: " << palindrome << endl;
+}
+
+vector<long> findPrimeNumbers(long minValue, long maxValue)
+{
+	vector<long> result;
+	for (long i(minValue); i <= maxValue; i++)
+	{
+		if (isPrimeNumber(i))
+		{
+			result.push_back(i);
+		}
+	}
+	return result;
+}

@@ -1,3 +1,6 @@
+// content of file Toilet_controller_v3.ino
+// you can open it with Arduino IDE
+
 /* This program controls light and fan in the toilet using data from laser sensor and
  *  HC-SR04 sensor. Photoresistor, which is illuminated by a laser, is located at the door,
  *  sound sensor is located at the wall in front of the door. When the door is opens, light
@@ -67,5 +70,4 @@ void loop() {
     digitalWrite(light, LOW);
  }
 }
-
 

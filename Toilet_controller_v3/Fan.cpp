@@ -27,7 +27,7 @@
   }
 
   void Fan::enableUsingFan()
-  {
+  { // if light is turned on for a long time
     if(current_millis - previous_millis_on >= stay_off_time)
       {
         digitalWrite(fan_pin, HIGH);
@@ -36,7 +36,7 @@
   }
 
   void Fan::disableUsingFan()
-  {
+  { // if light is turned off wait for some time and than turn off the fan
     previous_millis_on = current_millis;
     if(current_millis - previous_millis_off >= stay_on_time)
     {

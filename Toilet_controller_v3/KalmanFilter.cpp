@@ -11,7 +11,7 @@
     Xe  (0.0)
     {}
 
- float KalmanFilter::doFiltration(float val) {  //функция фильтрации
+ float KalmanFilter::doFiltration(float val) {
   Pc = P + reaction_speed;
   G = Pc/(Pc + average_deviation);
   P = (1-G)*Pc;

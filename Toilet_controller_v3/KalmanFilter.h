@@ -13,18 +13,18 @@ class KalmanFilter
 {
   public:
   
-    KalmanFilter(float averageDeviation, float reactionSpeed);  //среднее отклонение и скорость реакции
-    float doFiltration(float val);  //функция фильтрации
+    KalmanFilter(float averageDeviation, float reactionSpeed);
+    float doFiltration(float val);  //filtration function
  
   private:
-    float average_deviation;  // среднее отклонение
-    float reaction_speed; // скорость реакции на изменение (подбирается вручную)
-    float Pc;
-    float G;
-    float P;
-    float Xp;
-    float Zp;
-    float Xe;   
+    float average_deviation; 
+    float reaction_speed; // reaction speed to change (selected manually)
+    float Pc;   //
+    float G;    //
+    float P;    //  auxiliary variables
+    float Xp;   //
+    float Zp;   //
+    float Xe;   //
 };
 
 #endif
